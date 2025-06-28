@@ -6,7 +6,7 @@
 // 	protoc        v6.31.0--rc2
 // source: hello.proto
 
-package wrt_orders_v1
+package wrt_hello_v1
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -120,9 +120,9 @@ const file_hello_proto_rawDesc = "" +
 	"SayRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"'\n" +
 	"\vSayResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage26\n" +
-	"\rOrdersService\x12%\n" +
-	"\bSayHello\x12\v.SayRequest\x1a\f.SayResponseB\x0fZ\rwrt-orders.v1b\x06proto3"
+	"\amessage\x18\x01 \x01(\tR\amessage25\n" +
+	"\fHelloService\x12%\n" +
+	"\bSayHello\x12\v.SayRequest\x1a\f.SayResponseB\x0eZ\fwrt-hello.v1b\x06proto3"
 
 var (
 	file_hello_proto_rawDescOnce sync.Once
@@ -142,8 +142,8 @@ var file_hello_proto_goTypes = []any{
 	(*SayResponse)(nil), // 1: SayResponse
 }
 var file_hello_proto_depIdxs = []int32{
-	0, // 0: OrdersService.SayHello:input_type -> SayRequest
-	1, // 1: OrdersService.SayHello:output_type -> SayResponse
+	0, // 0: HelloService.SayHello:input_type -> SayRequest
+	1, // 1: HelloService.SayHello:output_type -> SayResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

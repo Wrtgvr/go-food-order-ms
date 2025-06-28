@@ -3,7 +3,7 @@ syntax = "proto3";
 
 option go_package = "wrt-hello.v1";
 
-service OrdersService {
+service HelloService {
   rpc SayHello(SayRequest) returns(SayResponse);
 }
 
