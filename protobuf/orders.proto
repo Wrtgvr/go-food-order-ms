@@ -4,7 +4,7 @@ option go_package = "wrt-orders.v1";
 
 service OrdersService {
   rpc CreateOrder(CreateOrderRequest) returns(CreateOrderResponse);
-  rpc GetOrder(GetOrderRequest) returns(GetOrderResponse);
+  rpc GetCustomerOrders(GetCustomerOrdersRequest) returns(GetCustomerOrdersResponse);
 }
 
 message Order {
@@ -24,10 +24,10 @@ message CreateOrderResponse {
   string status = 1;
 }
 
-message GetOrderRequest {
+message GetCustomerOrdersRequest {
   uint32 customerID = 1;
 }
 
-message GetOrderResponse {
+message GetCustomerOrdersResponse {
   repeated Order orders = 1;
 }
