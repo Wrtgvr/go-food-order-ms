@@ -26,7 +26,7 @@ type Order struct {
 	OrderID       uint32                 `protobuf:"varint,1,opt,name=orderID,proto3" json:"orderID,omitempty"`
 	CustomerID    uint32                 `protobuf:"varint,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
 	ProductID     uint32                 `protobuf:"varint,3,opt,name=productID,proto3" json:"productID,omitempty"`
-	Quantity      int32                  `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Quantity      uint32                 `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -82,7 +82,7 @@ func (x *Order) GetProductID() uint32 {
 	return 0
 }
 
-func (x *Order) GetQuantity() int32 {
+func (x *Order) GetQuantity() uint32 {
 	if x != nil {
 		return x.Quantity
 	}
@@ -93,7 +93,7 @@ type CreateOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CustomerID    uint32                 `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
 	ProductID     uint32                 `protobuf:"varint,2,opt,name=productID,proto3" json:"productID,omitempty"`
-	Quantity      int32                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Quantity      uint32                 `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -142,7 +142,7 @@ func (x *CreateOrderRequest) GetProductID() uint32 {
 	return 0
 }
 
-func (x *CreateOrderRequest) GetQuantity() int32 {
+func (x *CreateOrderRequest) GetQuantity() uint32 {
 	if x != nil {
 		return x.Quantity
 	}
@@ -292,13 +292,13 @@ const file_orders_proto_rawDesc = "" +
 	"customerID\x18\x02 \x01(\rR\n" +
 	"customerID\x12\x1c\n" +
 	"\tproductID\x18\x03 \x01(\rR\tproductID\x12\x1a\n" +
-	"\bquantity\x18\x04 \x01(\x05R\bquantity\"n\n" +
+	"\bquantity\x18\x04 \x01(\rR\bquantity\"n\n" +
 	"\x12CreateOrderRequest\x12\x1e\n" +
 	"\n" +
 	"customerID\x18\x01 \x01(\rR\n" +
 	"customerID\x12\x1c\n" +
 	"\tproductID\x18\x02 \x01(\rR\tproductID\x12\x1a\n" +
-	"\bquantity\x18\x03 \x01(\x05R\bquantity\"-\n" +
+	"\bquantity\x18\x03 \x01(\rR\bquantity\"-\n" +
 	"\x13CreateOrderResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\"1\n" +
 	"\x0fGetOrderRequest\x12\x1e\n" +
