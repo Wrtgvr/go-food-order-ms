@@ -23,10 +23,10 @@ const (
 
 type Order struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderID       int32                  `protobuf:"varint,1,opt,name=orderID,proto3" json:"orderID,omitempty"`
-	CustomerID    int32                  `protobuf:"varint,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	ProductID     int32                  `protobuf:"varint,3,opt,name=productID,proto3" json:"productID,omitempty"`
-	Quantity      int32                  `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	OrderID       uint32                 `protobuf:"varint,1,opt,name=orderID,proto3" json:"orderID,omitempty"`
+	CustomerID    uint32                 `protobuf:"varint,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	ProductID     uint32                 `protobuf:"varint,3,opt,name=productID,proto3" json:"productID,omitempty"`
+	Quantity      uint32                 `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -61,28 +61,28 @@ func (*Order) Descriptor() ([]byte, []int) {
 	return file_orders_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Order) GetOrderID() int32 {
+func (x *Order) GetOrderID() uint32 {
 	if x != nil {
 		return x.OrderID
 	}
 	return 0
 }
 
-func (x *Order) GetCustomerID() int32 {
+func (x *Order) GetCustomerID() uint32 {
 	if x != nil {
 		return x.CustomerID
 	}
 	return 0
 }
 
-func (x *Order) GetProductID() int32 {
+func (x *Order) GetProductID() uint32 {
 	if x != nil {
 		return x.ProductID
 	}
 	return 0
 }
 
-func (x *Order) GetQuantity() int32 {
+func (x *Order) GetQuantity() uint32 {
 	if x != nil {
 		return x.Quantity
 	}
@@ -91,9 +91,9 @@ func (x *Order) GetQuantity() int32 {
 
 type CreateOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    int32                  `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	ProductID     int32                  `protobuf:"varint,2,opt,name=productID,proto3" json:"productID,omitempty"`
-	Quantity      int32                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	CustomerID    uint32                 `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	ProductID     uint32                 `protobuf:"varint,2,opt,name=productID,proto3" json:"productID,omitempty"`
+	Quantity      uint32                 `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -128,21 +128,21 @@ func (*CreateOrderRequest) Descriptor() ([]byte, []int) {
 	return file_orders_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateOrderRequest) GetCustomerID() int32 {
+func (x *CreateOrderRequest) GetCustomerID() uint32 {
 	if x != nil {
 		return x.CustomerID
 	}
 	return 0
 }
 
-func (x *CreateOrderRequest) GetProductID() int32 {
+func (x *CreateOrderRequest) GetProductID() uint32 {
 	if x != nil {
 		return x.ProductID
 	}
 	return 0
 }
 
-func (x *CreateOrderRequest) GetQuantity() int32 {
+func (x *CreateOrderRequest) GetQuantity() uint32 {
 	if x != nil {
 		return x.Quantity
 	}
@@ -193,27 +193,27 @@ func (x *CreateOrderResponse) GetStatus() string {
 	return ""
 }
 
-type GetOrderRequest struct {
+type GetCustomerOrdersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    int32                  `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerID    uint32                 `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetOrderRequest) Reset() {
-	*x = GetOrderRequest{}
+func (x *GetCustomerOrdersRequest) Reset() {
+	*x = GetCustomerOrdersRequest{}
 	mi := &file_orders_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOrderRequest) String() string {
+func (x *GetCustomerOrdersRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOrderRequest) ProtoMessage() {}
+func (*GetCustomerOrdersRequest) ProtoMessage() {}
 
-func (x *GetOrderRequest) ProtoReflect() protoreflect.Message {
+func (x *GetCustomerOrdersRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_orders_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -225,39 +225,39 @@ func (x *GetOrderRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOrderRequest.ProtoReflect.Descriptor instead.
-func (*GetOrderRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetCustomerOrdersRequest.ProtoReflect.Descriptor instead.
+func (*GetCustomerOrdersRequest) Descriptor() ([]byte, []int) {
 	return file_orders_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetOrderRequest) GetCustomerID() int32 {
+func (x *GetCustomerOrdersRequest) GetCustomerID() uint32 {
 	if x != nil {
 		return x.CustomerID
 	}
 	return 0
 }
 
-type GetOrderResponse struct {
+type GetCustomerOrdersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Orders        []*Order               `protobuf:"bytes,1,rep,name=orders,proto3" json:"orders,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetOrderResponse) Reset() {
-	*x = GetOrderResponse{}
+func (x *GetCustomerOrdersResponse) Reset() {
+	*x = GetCustomerOrdersResponse{}
 	mi := &file_orders_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetOrderResponse) String() string {
+func (x *GetCustomerOrdersResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetOrderResponse) ProtoMessage() {}
+func (*GetCustomerOrdersResponse) ProtoMessage() {}
 
-func (x *GetOrderResponse) ProtoReflect() protoreflect.Message {
+func (x *GetCustomerOrdersResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_orders_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -269,12 +269,12 @@ func (x *GetOrderResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOrderResponse.ProtoReflect.Descriptor instead.
-func (*GetOrderResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetCustomerOrdersResponse.ProtoReflect.Descriptor instead.
+func (*GetCustomerOrdersResponse) Descriptor() ([]byte, []int) {
 	return file_orders_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *GetOrderResponse) GetOrders() []*Order {
+func (x *GetCustomerOrdersResponse) GetOrders() []*Order {
 	if x != nil {
 		return x.Orders
 	}
@@ -287,29 +287,29 @@ const file_orders_proto_rawDesc = "" +
 	"\n" +
 	"\forders.proto\"{\n" +
 	"\x05Order\x12\x18\n" +
-	"\aorderID\x18\x01 \x01(\x05R\aorderID\x12\x1e\n" +
+	"\aorderID\x18\x01 \x01(\rR\aorderID\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x02 \x01(\x05R\n" +
+	"customerID\x18\x02 \x01(\rR\n" +
 	"customerID\x12\x1c\n" +
-	"\tproductID\x18\x03 \x01(\x05R\tproductID\x12\x1a\n" +
-	"\bquantity\x18\x04 \x01(\x05R\bquantity\"n\n" +
+	"\tproductID\x18\x03 \x01(\rR\tproductID\x12\x1a\n" +
+	"\bquantity\x18\x04 \x01(\rR\bquantity\"n\n" +
 	"\x12CreateOrderRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\x05R\n" +
+	"customerID\x18\x01 \x01(\rR\n" +
 	"customerID\x12\x1c\n" +
-	"\tproductID\x18\x02 \x01(\x05R\tproductID\x12\x1a\n" +
-	"\bquantity\x18\x03 \x01(\x05R\bquantity\"-\n" +
+	"\tproductID\x18\x02 \x01(\rR\tproductID\x12\x1a\n" +
+	"\bquantity\x18\x03 \x01(\rR\bquantity\"-\n" +
 	"\x13CreateOrderResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\"1\n" +
-	"\x0fGetOrderRequest\x12\x1e\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\":\n" +
+	"\x18GetCustomerOrdersRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\x05R\n" +
-	"customerID\"2\n" +
-	"\x10GetOrderResponse\x12\x1e\n" +
-	"\x06orders\x18\x01 \x03(\v2\x06.OrderR\x06orders2z\n" +
+	"customerID\x18\x01 \x01(\rR\n" +
+	"customerID\";\n" +
+	"\x19GetCustomerOrdersResponse\x12\x1e\n" +
+	"\x06orders\x18\x01 \x03(\v2\x06.OrderR\x06orders2\x95\x01\n" +
 	"\rOrdersService\x128\n" +
-	"\vCreateOrder\x12\x13.CreateOrderRequest\x1a\x14.CreateOrderResponse\x12/\n" +
-	"\bGetOrder\x12\x10.GetOrderRequest\x1a\x11.GetOrderResponseB\x0fZ\rwrt-orders.v1b\x06proto3"
+	"\vCreateOrder\x12\x13.CreateOrderRequest\x1a\x14.CreateOrderResponse\x12J\n" +
+	"\x11GetCustomerOrders\x12\x19.GetCustomerOrdersRequest\x1a\x1a.GetCustomerOrdersResponseB\x0fZ\rwrt-orders.v1b\x06proto3"
 
 var (
 	file_orders_proto_rawDescOnce sync.Once
@@ -325,18 +325,18 @@ func file_orders_proto_rawDescGZIP() []byte {
 
 var file_orders_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_orders_proto_goTypes = []any{
-	(*Order)(nil),               // 0: Order
-	(*CreateOrderRequest)(nil),  // 1: CreateOrderRequest
-	(*CreateOrderResponse)(nil), // 2: CreateOrderResponse
-	(*GetOrderRequest)(nil),     // 3: GetOrderRequest
-	(*GetOrderResponse)(nil),    // 4: GetOrderResponse
+	(*Order)(nil),                     // 0: Order
+	(*CreateOrderRequest)(nil),        // 1: CreateOrderRequest
+	(*CreateOrderResponse)(nil),       // 2: CreateOrderResponse
+	(*GetCustomerOrdersRequest)(nil),  // 3: GetCustomerOrdersRequest
+	(*GetCustomerOrdersResponse)(nil), // 4: GetCustomerOrdersResponse
 }
 var file_orders_proto_depIdxs = []int32{
-	0, // 0: GetOrderResponse.orders:type_name -> Order
+	0, // 0: GetCustomerOrdersResponse.orders:type_name -> Order
 	1, // 1: OrdersService.CreateOrder:input_type -> CreateOrderRequest
-	3, // 2: OrdersService.GetOrder:input_type -> GetOrderRequest
+	3, // 2: OrdersService.GetCustomerOrders:input_type -> GetCustomerOrdersRequest
 	2, // 3: OrdersService.CreateOrder:output_type -> CreateOrderResponse
-	4, // 4: OrdersService.GetOrder:output_type -> GetOrderResponse
+	4, // 4: OrdersService.GetCustomerOrders:output_type -> GetCustomerOrdersResponse
 	3, // [3:5] is the sub-list for method output_type
 	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
