@@ -16,7 +16,7 @@ func NewOrdersService() *OrdersService {
 
 // Statuses constants
 const (
-	OnOrderCreated string = "being prepared"
+	OnOrderCreated string = "in queue"
 )
 
 // !! Temporary storage
