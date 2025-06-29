@@ -11,13 +11,13 @@ message Order {
   uint32 orderID = 1;
   uint32 customerID = 2;
   uint32 productID = 3;
-  int32 quantity = 4;
+  uint32 quantity = 4;
 }
 
 message CreateOrderRequest {
   uint32 customerID = 1;
   uint32 productID = 2;
-  int32 quantity = 3;
+  uint32 quantity = 3;
 }
 
 message CreateOrderResponse {
