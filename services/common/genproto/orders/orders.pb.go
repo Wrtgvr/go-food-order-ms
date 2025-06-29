@@ -23,9 +23,9 @@ const (
 
 type Order struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderID       int32                  `protobuf:"varint,1,opt,name=orderID,proto3" json:"orderID,omitempty"`
-	CustomerID    int32                  `protobuf:"varint,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	ProductID     int32                  `protobuf:"varint,3,opt,name=productID,proto3" json:"productID,omitempty"`
+	OrderID       uint32                 `protobuf:"varint,1,opt,name=orderID,proto3" json:"orderID,omitempty"`
+	CustomerID    uint32                 `protobuf:"varint,2,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	ProductID     uint32                 `protobuf:"varint,3,opt,name=productID,proto3" json:"productID,omitempty"`
 	Quantity      int32                  `protobuf:"varint,4,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -61,21 +61,21 @@ func (*Order) Descriptor() ([]byte, []int) {
 	return file_orders_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Order) GetOrderID() int32 {
+func (x *Order) GetOrderID() uint32 {
 	if x != nil {
 		return x.OrderID
 	}
 	return 0
 }
 
-func (x *Order) GetCustomerID() int32 {
+func (x *Order) GetCustomerID() uint32 {
 	if x != nil {
 		return x.CustomerID
 	}
 	return 0
 }
 
-func (x *Order) GetProductID() int32 {
+func (x *Order) GetProductID() uint32 {
 	if x != nil {
 		return x.ProductID
 	}
@@ -91,8 +91,8 @@ func (x *Order) GetQuantity() int32 {
 
 type CreateOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    int32                  `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
-	ProductID     int32                  `protobuf:"varint,2,opt,name=productID,proto3" json:"productID,omitempty"`
+	CustomerID    uint32                 `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	ProductID     uint32                 `protobuf:"varint,2,opt,name=productID,proto3" json:"productID,omitempty"`
 	Quantity      int32                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -128,14 +128,14 @@ func (*CreateOrderRequest) Descriptor() ([]byte, []int) {
 	return file_orders_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateOrderRequest) GetCustomerID() int32 {
+func (x *CreateOrderRequest) GetCustomerID() uint32 {
 	if x != nil {
 		return x.CustomerID
 	}
 	return 0
 }
 
-func (x *CreateOrderRequest) GetProductID() int32 {
+func (x *CreateOrderRequest) GetProductID() uint32 {
 	if x != nil {
 		return x.ProductID
 	}
@@ -195,7 +195,7 @@ func (x *CreateOrderResponse) GetStatus() string {
 
 type GetOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	CustomerID    int32                  `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
+	CustomerID    uint32                 `protobuf:"varint,1,opt,name=customerID,proto3" json:"customerID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -230,7 +230,7 @@ func (*GetOrderRequest) Descriptor() ([]byte, []int) {
 	return file_orders_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetOrderRequest) GetCustomerID() int32 {
+func (x *GetOrderRequest) GetCustomerID() uint32 {
 	if x != nil {
 		return x.CustomerID
 	}
@@ -287,23 +287,23 @@ const file_orders_proto_rawDesc = "" +
 	"\n" +
 	"\forders.proto\"{\n" +
 	"\x05Order\x12\x18\n" +
-	"\aorderID\x18\x01 \x01(\x05R\aorderID\x12\x1e\n" +
+	"\aorderID\x18\x01 \x01(\rR\aorderID\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x02 \x01(\x05R\n" +
+	"customerID\x18\x02 \x01(\rR\n" +
 	"customerID\x12\x1c\n" +
-	"\tproductID\x18\x03 \x01(\x05R\tproductID\x12\x1a\n" +
+	"\tproductID\x18\x03 \x01(\rR\tproductID\x12\x1a\n" +
 	"\bquantity\x18\x04 \x01(\x05R\bquantity\"n\n" +
 	"\x12CreateOrderRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\x05R\n" +
+	"customerID\x18\x01 \x01(\rR\n" +
 	"customerID\x12\x1c\n" +
-	"\tproductID\x18\x02 \x01(\x05R\tproductID\x12\x1a\n" +
+	"\tproductID\x18\x02 \x01(\rR\tproductID\x12\x1a\n" +
 	"\bquantity\x18\x03 \x01(\x05R\bquantity\"-\n" +
 	"\x13CreateOrderResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\"1\n" +
 	"\x0fGetOrderRequest\x12\x1e\n" +
 	"\n" +
-	"customerID\x18\x01 \x01(\x05R\n" +
+	"customerID\x18\x01 \x01(\rR\n" +
 	"customerID\"2\n" +
 	"\x10GetOrderResponse\x12\x1e\n" +
 	"\x06orders\x18\x01 \x03(\v2\x06.OrderR\x06orders2z\n" +

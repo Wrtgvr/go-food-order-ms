@@ -8,15 +8,15 @@ service OrdersService {
 }
 
 message Order {
-  int32 orderID = 1;
-  int32 customerID = 2;
-  int32 productID = 3;
+  uint32 orderID = 1;
+  uint32 customerID = 2;
+  uint32 productID = 3;
   int32 quantity = 4;
 }
 
 message CreateOrderRequest {
-  int32 customerID = 1;
-  int32 productID = 2;
+  uint32 customerID = 1;
+  uint32 productID = 2;
   int32 quantity = 3;
 }
 
@@ -25,7 +25,7 @@ message CreateOrderResponse {
 }
 
 message GetOrderRequest {
-  int32 customerID = 1;
+  uint32 customerID = 1;
 }
 
 message GetOrderResponse {
