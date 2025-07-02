@@ -7,7 +7,6 @@ import (
 	wrt_orders_v1 "github.com/wrtgvr/go-food-order-ms/services/common/genproto/orders"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 type OrdersGrpcHandler struct {
@@ -56,12 +55,12 @@ func (h *OrdersGrpcHandler) GetCustomerOrders(ctx context.Context, req *wrt_orde
 	)
 
 	if req.GetCustomerID() <= 0 {
-		return nil, status.Error(codes.InvalidArgument, "invalid customer id")
+		return nil, logAndWrapError(h.deps.Log, "invalid customer id", nil, codes.InvalidArgument)
 	}
 
 	domainOrders, err := h.deps.OrdersService.GetCustomerOrders(ctx, req.GetCustomerID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "unable to get orders: %v", err)
+		return nil, logAndWrapError(h.deps.Log, "unable to get orders", err, codes.Internal)
 	}
 
 	orders := []*wrt_orders_v1.Order{}
