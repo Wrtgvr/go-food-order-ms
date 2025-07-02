@@ -23,23 +23,24 @@ func NewOrdersGrpcHandler(grpcServer *grpc.Server, deps *HandlerDeps) {
 }
 
 func (h *OrdersGrpcHandler) CreateOrder(ctx context.Context, req *wrt_orders_v1.CreateOrderRequest) (*wrt_orders_v1.CreateOrderResponse, error) {
-	h.deps.Log.Info("gRPC request",
+	log := h.deps.Log.With(
 		slog.Group("request",
-			slog.Int64("Customer ID", int64(req.GetCustomerID())),
-			slog.Int64("Product ID", int64(req.GetProductID())),
+			slog.Int64("CustomerID", int64(req.GetCustomerID())),
+			slog.Int64("ProductID", int64(req.GetProductID())),
 			slog.Int64("Quantity", int64(req.GetQuantity())),
 		),
 	)
+	log.Info("gRPC request")
 
 	createOrderParams := toDomainCreateOrder(req)
 
 	if err := createOrderParams.Validate(); err != nil {
-		return nil, logAndWrapError(h.deps.Log, "request validation failed", err, codes.InvalidArgument)
+		return nil, logAndWrapError(log, "request validation failed", err, codes.InvalidArgument)
 	}
 
 	err := h.deps.OrdersService.CreateOrder(ctx, createOrderParams)
 	if err != nil {
-		return nil, logAndWrapError(h.deps.Log, "unable to create order", err, codes.Internal)
+		return nil, logAndWrapError(log, "unable to create order", err, codes.Internal)
 	}
 
 	return &wrt_orders_v1.CreateOrderResponse{
@@ -48,19 +49,20 @@ func (h *OrdersGrpcHandler) CreateOrder(ctx context.Context, req *wrt_orders_v1.
 }
 
 func (h *OrdersGrpcHandler) GetCustomerOrders(ctx context.Context, req *wrt_orders_v1.GetCustomerOrdersRequest) (*wrt_orders_v1.GetCustomerOrdersResponse, error) {
-	h.deps.Log.Info("gRPC request",
+	log := h.deps.Log.With(
 		slog.Group("request",
-			slog.Int64("Customer ID", int64(req.GetCustomerID())),
+			slog.Int64("CustomerID", int64(req.GetCustomerID())),
 		),
 	)
+	log.Info("gRPC request")
 
 	if req.GetCustomerID() <= 0 {
-		return nil, logAndWrapError(h.deps.Log, "invalid customer id", nil, codes.InvalidArgument)
+		return nil, logAndWrapError(log, "invalid customer id", nil, codes.InvalidArgument)
 	}
 
 	domainOrders, err := h.deps.OrdersService.GetCustomerOrders(ctx, req.GetCustomerID())
 	if err != nil {
-		return nil, logAndWrapError(h.deps.Log, "unable to get orders", err, codes.Internal)
+		return nil, logAndWrapError(log, "unable to get orders", err, codes.Internal)
 	}
 
 	orders := []*wrt_orders_v1.Order{}
