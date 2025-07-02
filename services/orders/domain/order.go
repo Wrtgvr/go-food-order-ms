@@ -13,7 +13,11 @@ type Order struct {
 	Status     string
 }
 
-// Status consts
+const (
+	StatusOrderInQueue   = "in queue"
+	StatusOrderPreparing = "is preparing"
+	StatusOrderReady     = "ready"
+)
 
 func (o Order) Validate() error {
 	errs := make([]string, 0, 5)

@@ -14,11 +14,6 @@ func NewOrdersService() *OrdersService {
 	return &OrdersService{}
 }
 
-// Statuses constants
-const (
-	OnOrderCreated string = "in queue"
-)
-
 // !! Temporary storage
 var ordersMap = make(map[uint32]*domain.Order)
 var nextOrderId uint32 = 0
@@ -29,7 +24,7 @@ func (s *OrdersService) CreateOrder(ctx context.Context, params *domain.CreateOr
 		CustomerID: params.CustomerID,
 		ProductID:  params.ProductID,
 		Quantity:   params.Quantity,
-		Status:     OnOrderCreated,
+		Status:     domain.StatusOrderInQueue,
 	}
 	nextOrderId++
 
