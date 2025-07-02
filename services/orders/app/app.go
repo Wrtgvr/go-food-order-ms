@@ -5,7 +5,8 @@ type App struct {
 }
 
 func NewApp(addr string) *App {
-	grpcServer := newGRPCServer(addr)
+	logger := initLogger()
+	grpcServer := newGRPCServer(addr, logger)
 
 	return &App{
 		GrpcServer: grpcServer,

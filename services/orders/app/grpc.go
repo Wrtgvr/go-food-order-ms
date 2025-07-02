@@ -1,7 +1,7 @@
 package app
 
 import (
-	"log"
+	"log/slog"
 	"net"
 
 	"github.com/wrtgvr/go-food-order-ms/services/orders/handler"
@@ -11,11 +11,13 @@ import (
 
 type gRPCServer struct {
 	addr string
+	log  *slog.Logger
 }
 
-func newGRPCServer(addr string) *gRPCServer {
+func newGRPCServer(addr string, log *slog.Logger) *gRPCServer {
 	return &gRPCServer{
 		addr: addr,
+		log:  log,
 	}
 }
 
@@ -28,13 +30,18 @@ func (s *gRPCServer) Run() error {
 
 	grpcServer := grpc.NewServer()
 
-	// services
+	// services & handler
 	ordersService := service.NewOrdersService()
 
-	handler.NewOrdersGrpcHandler(grpcServer, ordersService)
+	handlerDeps := &handler.HandlerDeps{
+		OrdersService: ordersService,
+		Log:           s.log,
+	}
+
+	handler.NewOrdersGrpcHandler(grpcServer, handlerDeps)
 
 	// log
-	log.Printf("Server starting on %s", s.addr)
+	s.log.Info("Launching server", slog.String("addr", s.addr))
 
 	// serve
 	return grpcServer.Serve(ln)
