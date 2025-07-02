@@ -4,8 +4,9 @@ import (
 	"context"
 
 	wrt_orders_v1 "github.com/wrtgvr/go-food-order-ms/services/common/genproto/orders"
-	"github.com/wrtgvr/go-food-order-ms/services/orders/domain"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type OrdersGrpcHandler struct {
@@ -22,17 +23,15 @@ func NewOrdersGrpcHandler(grpcServer *grpc.Server, ordersService OrdersService) 
 }
 
 func (h *OrdersGrpcHandler) CreateOrder(ctx context.Context, req *wrt_orders_v1.CreateOrderRequest) (*wrt_orders_v1.CreateOrderResponse, error) {
-	createOrderParams := &domain.CreateOrderParams{
-		CustomerID: req.GetCustomerID(),
-		ProductID:  req.GetProductID(),
-		Quantity:   req.GetQuantity(),
+	createOrderParams := toDomainCreateOrder(req)
+
+	if err := createOrderParams.Validate(); err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, "request validation failed: %v", err)
 	}
-	// TODO: funcs-converters (CreateOrderRequest -> CreateOrderParams)
-	// TODO: fields validation
 
 	err := h.ordersService.CreateOrder(ctx, createOrderParams)
 	if err != nil {
-		return nil, err
+		return nil, status.Errorf(codes.Internal, "unable to create order: %v", err)
 	}
 
 	return &wrt_orders_v1.CreateOrderResponse{
@@ -41,22 +40,19 @@ func (h *OrdersGrpcHandler) CreateOrder(ctx context.Context, req *wrt_orders_v1.
 }
 
 func (h *OrdersGrpcHandler) GetCustomerOrders(ctx context.Context, req *wrt_orders_v1.GetCustomerOrdersRequest) (*wrt_orders_v1.GetCustomerOrdersResponse, error) {
+	if req.GetCustomerID() <= 0 {
+		return nil, status.Error(codes.InvalidArgument, "invalid customer id")
+	}
+
 	domainOrders, err := h.ordersService.GetCustomerOrders(ctx, req.GetCustomerID())
 	if err != nil {
-		return nil, err
+		return nil, status.Errorf(codes.Internal, "unable to get orders: %v", err)
 	}
-	// TODO: fields validation
 
 	orders := []*wrt_orders_v1.Order{}
 	for _, v := range domainOrders {
-		orders = append(orders, &wrt_orders_v1.Order{
-			OrderID:    v.OrderID,
-			CustomerID: v.CustomerID,
-			ProductID:  v.ProductID,
-			Quantity:   v.Quantity,
-		})
+		orders = append(orders, fromDomainOrder(v))
 	}
-	// TODO: funcs-converters (domain.Order -> wrt_orders_v1.Order)
 
 	return &wrt_orders_v1.GetCustomerOrdersResponse{
 		Orders: orders,
